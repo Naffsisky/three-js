@@ -30,15 +30,34 @@ var renderer = new THREE.WebGLRenderer();
 
 const geo_saya = new THREE.BufferGeometry();
 let vertices = new Float32Array([
-    -1.0, -1.0, 0.0, 
-    1.0, 1.0, 0.0, 
-    -1.0, 1.0, 0.0, 
-    1.0, 1.0, 0.0, 
-    -1.0, 1.0, 0.0, 
-    1.0, -1.0, 0.0
+  -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, -1.0, 1.0,
+
+  -1.0, -1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, -1.0, -1.0,
 ]);
+
+let colors = new Float32Array([
+  1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+
+  0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
+]);
+
 geo_saya.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
-const mat_saya = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
+geo_saya.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+geo_saya.setIndex([
+  0, 3, 1, 1, 2, 0,
+
+  4, 6, 5, 5, 7, 4,
+
+  4, 0, 2, 2, 6, 4,
+
+  5, 1, 3, 3, 7, 5,
+
+  1, 5, 6, 6, 2, 1,
+
+  0, 4, 7, 7, 3, 0,
+]);
+
+const mat_saya = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
 const mesh_saya = new THREE.Mesh(geo_saya, mat_saya);
 scene.add(mesh_saya);
 
@@ -55,7 +74,8 @@ window.addEventListener("resize", function () {
 
 function draw() {
   requestAnimationFrame(draw);
-  mesh_saya.rotation.y += 0.05;
+  mesh_saya.rotation.y += 0.03;
+  mesh_saya.rotation.x += 0.03;
   renderer.render(scene, camera);
 }
 
