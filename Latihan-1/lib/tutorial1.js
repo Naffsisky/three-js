@@ -74,8 +74,8 @@ window.addEventListener("resize", function () {
 
 function draw() {
   requestAnimationFrame(draw);
-  mesh_saya.rotation.y += 0.03;
-  mesh_saya.rotation.x += 0.03;
+  mesh_saya.rotation.y += 0.01;
+  mesh_saya.rotation.x += 0.01;
   renderer.render(scene, camera);
 }
 
