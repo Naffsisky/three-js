@@ -91,17 +91,20 @@ let verticesz = new Float32Array([
   1.0, 1.0, 0.0, -1.0, 1.0, 0.0, -1.0, -1.0, 0.0,
 ]);
 
-let uvs = new Float32Array([
-  0.0, 0.0,
-  1.0, 0.0,
-  1.0, 1.0,
-  1.0, 1.0,
-  0.0, 1.0,
-  0.0, 0.0,
+let uvs = new Float32Array([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0]);
+
+let indices = new Uint16Array([
+  0,
+  1,
+  2, // Triangle ABC
+  3,
+  4,
+  5, // Triangle ACD
 ]);
 
 geo_2nd.setAttribute("position", new THREE.BufferAttribute(verticesz, 3));
 geo_2nd.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+geo_2nd.setIndex(new THREE.BufferAttribute(indices, 1));
 
 let material_2nd = new THREE.MeshBasicMaterial({ color: 0xff0000, map: D_texture });
 let mesh2 = new THREE.Mesh(geo_2nd, material_2nd);
@@ -134,6 +137,9 @@ function draw() {
 
   mesh_saya4.rotation.y -= 0.005;
   mesh_saya4.rotation.x -= 0.005;
+
+  mesh2.rotation.y -= 0.005;
+  mesh2.rotation.x -= 0.005;
 
   renderer.render(scene, camera);
 }
